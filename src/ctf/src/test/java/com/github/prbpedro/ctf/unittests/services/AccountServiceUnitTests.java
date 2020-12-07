@@ -32,7 +32,7 @@ public class AccountServiceUnitTests {
 	private AccountRepository accountRepository;
 	
 	@Test
-	void getSucessTest() {		
+	public void getSucessTest() {		
 		Account acc = new Account();
 		acc.setDocumentNumber(1L);
 		acc.setId(1L);
@@ -45,7 +45,7 @@ public class AccountServiceUnitTests {
 	}
 	
 	@Test
-	void getNotFoundSucessTest() {		
+	public void getNotFoundSucessTest() {		
 		Account acc = new Account();
 		acc.setDocumentNumber(1L);
 		acc.setId(1L);
@@ -58,7 +58,7 @@ public class AccountServiceUnitTests {
 	}
 	
 	@Test
-	void getExceptionTest() {
+	public void getExceptionTest() {
 		Mockito.when(accountRepository.findById(1L)).thenThrow(new RuntimeException());
 		assertThrows(RuntimeException.class, () -> {
 			accountService.get(1L);
@@ -66,7 +66,7 @@ public class AccountServiceUnitTests {
 	}
 
 	@Test
-	void saveSucessTest() {
+	public void saveSucessTest() {
 		Mockito.when(accountRepository.existsByDocumentNumber(1L)).thenReturn(false);
 
 		Account acc = new Account();
@@ -84,7 +84,7 @@ public class AccountServiceUnitTests {
 	}
 
 	@Test
-	void saveAlredyExistsDocumentNumberSucessTest() {
+	public void saveAlredyExistsDocumentNumberSucessTest() {
 		Mockito.when(accountRepository.existsByDocumentNumber(1L)).thenReturn(true);
 
 		Account acc = new Account();
@@ -103,7 +103,7 @@ public class AccountServiceUnitTests {
 	}
 
 	@Test
-	void saveExceptionTest() {
+	public void saveExceptionTest() {
 		Mockito.when(accountRepository.existsByDocumentNumber(1L)).thenThrow(new RuntimeException());
 
 		Account acc = new Account();
@@ -111,6 +111,28 @@ public class AccountServiceUnitTests {
 		acc.setId(1L);
 		assertThrows(RuntimeException.class, () -> {
 			accountService.save(acc);
+		});
+	}
+	
+	@Test
+	public void existsSucessTest() {		
+		Mockito.when(accountRepository.existsById(1L)).thenReturn(true);
+		boolean resp = accountService.exists(1L);
+		assertTrue(resp);
+	}
+	
+	@Test
+	public void existsFailTest() {		
+		Mockito.when(accountRepository.existsById(1L)).thenReturn(false);
+		boolean resp = accountService.exists(1L);
+		assertFalse(resp);
+	}
+	
+	@Test
+	public void existsExceptionTest() {
+		Mockito.when(accountRepository.existsById(1L)).thenThrow(new RuntimeException());
+		assertThrows(RuntimeException.class, () -> {
+			accountService.exists(1L);
 		});
 	}
 }

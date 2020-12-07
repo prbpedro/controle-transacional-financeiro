@@ -80,4 +80,22 @@ public class AccountRepositoryIntegretionTests {
 
 		assertTrue(exists.isPresent());
 	}
+	
+	@Test
+	public void existsByIdSucessTest() {
+		Account acc = new Account();
+		acc.setDocumentNumber(55L);
+		assertNull(acc.getId());
+
+		accountRepository.save(acc);
+		
+		boolean exists = accountRepository.existsById(acc.getId());
+		assertTrue(exists);
+	}
+	
+	@Test
+	public void notExistsByIdFailTest() {
+		boolean exists = accountRepository.existsById(66L);
+		assertFalse(exists);
+	}
 }

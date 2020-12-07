@@ -47,4 +47,9 @@ public class AccountService implements IAccountService {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean exists(Long id) {
+		return accountRepository.existsById(id);
+	}
 }

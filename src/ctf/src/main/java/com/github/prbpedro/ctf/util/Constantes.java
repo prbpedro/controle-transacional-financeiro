@@ -20,6 +20,19 @@ public class Constantes {
 	public static final String SWAGGER_API_DESCRIPTION = "API Rest que fornece um controle transacional financeiro simples";
 	public static final String SWAGGER_API_VERSION = "1.0";
 	
+	public static final String OPERATION_TYPE_TABLE_NAME = "OperationsTypes";
+	public static final String OPERATION_TYPE_COLUMN_ID_NAME = "OperationType_ID";
+	public static final String OPERATION_TYPE_COLUMN_DESCRIPTION_NAME = "Description";
+	public static final String COMPRA_A_VISTA = "COMPRA A VISTA";
+	public static final String COMPRA_PARCELADA = "COMPRA PARCELADA";
+	public static final String SAQUE = "SAQUE";
+	public static final String PAGAMENTO = "PAGAMENTO";
+	public static final Integer COMPRA_A_VISTA_ID = 1;
+	public static final Integer COMPRA_PARCELADA_ID = 2;
+	public static final Integer SAQUE_ID = 3;
+	public static final Integer PAGAMENTO_ID = 4;
+	
+	
 	public static final String ACCOUNT_TABLE_NAME = "Accounts";
 	public static final String ACCOUNT_COLUMN_ID_NAME = "Account_ID";
 	public static final String ACCOUNT_COLUMN_DOCUMENT_NUMBER_NAME = "Document_Number";
