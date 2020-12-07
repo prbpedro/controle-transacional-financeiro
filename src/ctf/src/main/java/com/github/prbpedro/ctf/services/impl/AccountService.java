@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Account;
@@ -14,7 +14,7 @@ import com.github.prbpedro.ctf.repositorios.AccountRepository;
 import com.github.prbpedro.ctf.services.IAccountService;
 import com.github.prbpedro.ctf.util.Constantes;
 
-@Component
+@Service
 public class AccountService implements IAccountService {
 
 	private final AccountRepository accountRepository;

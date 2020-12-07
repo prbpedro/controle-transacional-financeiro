@@ -1,13 +1,13 @@
 package com.github.prbpedro.ctf.services.impl;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.github.prbpedro.ctf.entidades.OperationType;
 import com.github.prbpedro.ctf.repositorios.OperationTypeRepository;
 import com.github.prbpedro.ctf.services.IOperationTypeService;
 import com.github.prbpedro.ctf.util.Constantes;
 
-@Component
+@Service
 public class OperationTypeService implements IOperationTypeService {
 
 	private final OperationTypeRepository operationTypeRepository;
