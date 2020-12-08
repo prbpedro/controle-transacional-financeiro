@@ -3,8 +3,8 @@ package com.github.prbpedro.ctf.util;
 public class Constantes {
 
 	public static final String ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS = "Já existe account com este documentNumber";
-	public static final String ERROR_PERSIST_ACCOUNT = "Erro ao persistir account";
-	public static final String SUCESS_PERSIST_ACCOUNT = "Sucesso ao incluir account";
+	public static final String ERROR_PERSIST = "Erro ao persistir registro";
+	public static final String SUCESS_PERSIST = "Sucesso ao incluir registro";
 	public static final String ERROR_VALIDACAO = "Erro na validação da entrada";
 	public static final String ERROR_VALIDACAO_JSON_INVALIDO = ERROR_VALIDACAO + ", json inválido";
 	
@@ -42,5 +42,17 @@ public class Constantes {
 	public static final String ERRO_BUSCA_ACCOUNT = "Erro na busca de account";
 	public static final String SUCESSO_BUSCA_ACCOUNT = "Account encontrada";
 	public static final String NOT_FOUND_BUSCA_ACCOUNT = "Account não encontrada";
+	
+	public static final String TRANSACTION_TABLE_NAME = "Transactions";
+	public static final String TRANSACTION_COLUMN_ID_NAME = "Transaction_ID";
+	public static final String TRANSACTION_COLUMN_ACCOUNT_ID_NAME = "Account_ID";
+	public static final String TRANSACTION_COLUMN_OPERATION_ID_NAME = "OperationType_ID";
+	public static final String TRANSACTION_COLUMN_AMOUNT_NAME = "Amount";
+	public static final String TRANSACTION_COLUMN_EVENT_DATE_NAME = "EventDate";
+	
+	public static final String API_TAG_TRANSACTIONS_CONTROLLER = "Transaction's Controller";
+	public static final String API_DESCRIPTION_TRANSACTIONS_CONTROLLER = "Mantém dados do tipo Transaction";
+	public static final String API_MAPPING_TRANSACTIONS_CONTROLLER = "/transactions";
+	public static final String API_DESCRIPTION_OPERATION_SAVE_TRANSACTIONS_CONTROLLER = "Cria novo registro do tipo Transaction";
 	
 }

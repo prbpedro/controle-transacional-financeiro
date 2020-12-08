@@ -22,7 +22,7 @@ import com.github.prbpedro.ctf.services.IAccountService;
 import com.github.prbpedro.ctf.util.Constantes;
 
 @SpringBootTest
-public class AccountControllerTest {
+public class AccountControllerTests {
 
 	@Autowired
 	private AccountController accountController;
@@ -80,7 +80,7 @@ public class AccountControllerTest {
 		ResponseEntity<GenericOperationResponse> resp = accountController.save(entrada);
 
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, resp.getStatusCode());
-		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.ERROR_PERSIST_ACCOUNT);
+		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.ERROR_PERSIST);
 		assertTrue(resp.getBody().isError());
 		assertEquals(resp.getBody().getEntity().getClass(), Account.class);
 		assertEquals(((Account) resp.getBody().getEntity()).getDocumentNumber(), entrada.getDocumentNumber());
@@ -94,7 +94,7 @@ public class AccountControllerTest {
 		acc.setDocumentNumber(999L);
 
 		ResponseEntity<GenericOperationResponse> opResp = new ResponseEntity<GenericOperationResponse>(
-				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST_ACCOUNT, acc), HttpStatus.OK);
+				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, acc), HttpStatus.OK);
 
 		Mockito.when(accountService.save(Mockito.any())).thenReturn(opResp);
 

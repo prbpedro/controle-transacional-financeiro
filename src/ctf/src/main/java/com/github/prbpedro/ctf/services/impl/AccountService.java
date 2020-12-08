@@ -35,7 +35,7 @@ public class AccountService implements IAccountService {
 		entity = accountRepository.save(entity);
 
 		return new ResponseEntity<>(
-				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST_ACCOUNT, entity),
+				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
 				HttpStatus.OK);
 	}
 	

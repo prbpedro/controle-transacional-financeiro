@@ -78,7 +78,7 @@ public class AccountServiceUnitTests {
 		ResponseEntity<GenericOperationResponse> resp = accountService.save(acc);
 
 		assertEquals(HttpStatus.OK, resp.getStatusCode());
-		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.SUCESS_PERSIST_ACCOUNT);
+		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.SUCESS_PERSIST);
 		assertEquals(resp.getBody().getEntity(), acc);
 		assertFalse(resp.getBody().isError());
 	}

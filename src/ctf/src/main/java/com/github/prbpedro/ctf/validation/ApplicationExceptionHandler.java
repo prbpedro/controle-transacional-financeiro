@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,9 +27,15 @@ public class ApplicationExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public GenericOperationResponse methodArgumentNotValidException(MethodArgumentNotValidException ex) {
 		BindingResult result = ex.getBindingResult();
-
+		
 		List<FieldError> fieldErrors = result.getFieldErrors();
-		return processFieldErrors(result.getObjectName(), fieldErrors);
+		GenericOperationResponse resp = processFieldErrors(result.getObjectName(), fieldErrors);
+		
+		for (ObjectError error : result.getGlobalErrors()) {
+			resp.getMessages().put(error.getObjectName(), error.getDefaultMessage());
+		}
+		
+		return resp;
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -40,10 +40,10 @@ public class AccountController {
 
 	@ApiOperation(value = Constantes.API_DESCRIPTION_OPERATION_SAVE_ACCOUNTS_CONTROLLER)
 	@ApiResponses(value = { 
-			@ApiResponse(code = 200, message = Constantes.SUCESS_PERSIST_ACCOUNT, response = GenericOperationResponse.class),
+			@ApiResponse(code = 200, message = Constantes.SUCESS_PERSIST, response = GenericOperationResponse.class),
 			@ApiResponse(code = 400, message = Constantes.ERROR_VALIDACAO, response = GenericOperationResponse.class),
 			@ApiResponse(code = 409, message = Constantes.ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS, response = GenericOperationResponse.class),
-			@ApiResponse(code = 500, message = Constantes.ERROR_PERSIST_ACCOUNT, response = GenericOperationResponse.class), })
+			@ApiResponse(code = 500, message = Constantes.ERROR_PERSIST, response = GenericOperationResponse.class), })
 	@PostMapping
 	public ResponseEntity<GenericOperationResponse> save(
 			@Valid 
@@ -56,9 +56,9 @@ public class AccountController {
 		try {
 			return accountService.save(entity);
 		} catch (Exception e) {
-			logger.error(Constantes.ERROR_PERSIST_ACCOUNT, e);
+			logger.error(Constantes.ERROR_PERSIST, e);
 			return new ResponseEntity<>(
-					new GenericOperationResponse(true, Constantes.ERROR_PERSIST_ACCOUNT, entity),
+					new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
