@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -39,6 +38,8 @@
         "min": false,
         "rightSide": false,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -56,11 +57,18 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_server_requests_seconds_count",
+          "expr": "http_server_requests_seconds_count{uri=~\".*accounts.*\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Method: {{method}}, URI: '{{uri}}', ResponseStatusCode: {{status}}",
           "refId": "A"
+        },
+        {
+          "expr": "http_server_requests_seconds_count{uri=~\".*transactions.*\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Method: {{method}}, URI: '{{uri}}', ResponseStatusCode: {{status}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -145,5 +153,5 @@
   "timezone": "",
   "title": "Requests",
   "uid": "WoG9yVJMk",
-  "version": 2
+  "version": 1
 }
