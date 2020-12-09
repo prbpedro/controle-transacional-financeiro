@@ -71,7 +71,7 @@ Para a execução dos testes de integração é utilizado o banco de dados H2 co
 Foi configurado o plugin jacoco-maven-plugin do Apache Maven para a coleta de informações sobre os testes do projeto no arquivo [pom.xml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/pom.xml).
 
 Os testes devem ser executados através do comando mvn abaixo, na pasta aonde esta localizado o arquivo [pom.xml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/pom.xml), para a geração do relatório de testes na pasta target/site/jacoco:
-```bash
+```sh
 mvn install jacoco:report
 ```
 Foi copiado para a pasta [src/ctf/tests-reports/jacoco](https://github.com/prbpedro/controle-transacional-financeiro/tree/main/src/ctf/tests-reports/jacoco), deste repositório, o relatório com os resultados dos testes da última alteração feita no repositório. Este pode ser acessado através do arquivo [index.html](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/tests-reports/jacoco/index.html).
@@ -87,7 +87,7 @@ Para a execução desta aplicação foi utilizado o Docker Compose que deve inic
    - grafana (Contém a instância do Grafana)
 
 Para iniciar os containers o comando abaixo deve ser executado executado na pasta que contém o arquivo [docker-compose.yml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/docker/docker-compose.yml):
-```bash
+```sh
 docker-compose up --build
 ```
 
@@ -98,7 +98,7 @@ Este container expõe a porta 3306 para acesso ao MySQL Server.
 
 #### Container web-service
 Para a execução deste container é necessário gerar um arquivo JAR com a web-api através do comando mvn do Apache Maven executado na pasta que contém o arquivo [pom.xml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/pom.xml) do projeto:
-```bash
+```sh
 mvn install
 ```
 Este comando irá gerar a pasta target que deverá conter o arquivo JAR  controle-transacional-financeiro-0.0.1-SNAPSHOT.jar que deverá ser copiado para a pasta [src/ctf/docker/app](https://github.com/prbpedro/controle-transacional-financeiro/tree/main/src/ctf/docker/app).
