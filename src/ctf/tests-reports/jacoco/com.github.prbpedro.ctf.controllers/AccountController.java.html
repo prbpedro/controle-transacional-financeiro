@@ -50,20 +50,20 @@ public class AccountController {
 			@RequestBody 
 			EntradaAccountSave entrada) {
 		
-<span class="fc" id="L53">		Account entity = new Account();</span>
-<span class="fc" id="L54">		entity.setDocumentNumber(entrada.getDocumentNumber());</span>
-		
+<span class="fc" id="L53">		Account entity = null;</span>
 		try {
+<span class="fc" id="L55">			entity = new Account();</span>
+<span class="fc" id="L56">			entity.setDocumentNumber(entrada.getDocumentNumber());</span>
 <span class="fc" id="L57">			return accountService.save(entity);</span>
 <span class="fc" id="L58">		} catch (Exception e) {</span>
 <span class="fc" id="L59">			logger.error(Constantes.ERROR_PERSIST, e);</span>
 <span class="fc" id="L60">			return new ResponseEntity&lt;&gt;(</span>
-<span class="fc" id="L61">					new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity),</span>
-<span class="fc" id="L62">					HttpStatus.INTERNAL_SERVER_ERROR);</span>
+					new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@ApiOperation(value = Constantes.API_DESCRIPTION_OPERATION_SAVE_ACCOUNTS_CONTROLLER)
+	@ApiOperation(value = Constantes.API_DESCRIPTION_OPERATION_GET_ACCOUNTS_CONTROLLER)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = Constantes.SUCESSO_BUSCA_ACCOUNT, response = Account.class),
 			@ApiResponse(code = 404, message = Constantes.NOT_FOUND_BUSCA_ACCOUNT, response = GenericOperationResponse.class),
@@ -77,17 +77,17 @@ public class AccountController {
 <span class="fc bfc" id="L77" title="All 2 branches covered.">			if(acc==null) {</span>
 <span class="fc" id="L78">				return new ResponseEntity&lt;&gt;(</span>
 <span class="fc" id="L79">						new GenericOperationResponse(false, Constantes.NOT_FOUND_BUSCA_ACCOUNT, id.toString()),</span>
-<span class="fc" id="L80">						HttpStatus.NOT_FOUND);</span>
+						HttpStatus.NOT_FOUND);
 			}else {
 <span class="fc" id="L82">				return new ResponseEntity&lt;&gt;(</span>
-<span class="fc" id="L83">						acc,</span>
-<span class="fc" id="L84">						HttpStatus.OK);</span>
+						acc,
+						HttpStatus.OK);
 			}
 <span class="fc" id="L86">		} catch (Exception e) {</span>
 <span class="fc" id="L87">			logger.error(Constantes.ERRO_BUSCA_ACCOUNT, e);</span>
 <span class="fc" id="L88">			return new ResponseEntity&lt;&gt;(</span>
 <span class="fc" id="L89">					new GenericOperationResponse(true, Constantes.ERRO_BUSCA_ACCOUNT, id.toString()),</span>
-<span class="fc" id="L90">					HttpStatus.INTERNAL_SERVER_ERROR);</span>
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

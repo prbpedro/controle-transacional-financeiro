@@ -27,8 +27,8 @@ public class TransactionService implements ITransactionService {
 <span class="fc" id="L27">		entity = transactionRepository.save(entity);</span>
 
 <span class="fc" id="L29">		return new ResponseEntity&lt;&gt;(</span>
-<span class="fc" id="L30">				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),</span>
-<span class="fc" id="L31">				HttpStatus.OK);</span>
+				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
+				HttpStatus.OK);
 	}
 	
 }

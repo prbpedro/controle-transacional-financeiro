@@ -3,6 +3,7 @@ package com.github.prbpedro.ctf.entidades;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,7 +14,7 @@ import com.github.prbpedro.ctf.util.Constantes;
 public class Account {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name=Constantes.ACCOUNT_COLUMN_ID_NAME)
 	private Long id;
 	

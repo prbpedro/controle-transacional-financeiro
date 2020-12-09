@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import com.github.prbpedro.ctf.controllers.TransactionController;
 import com.github.prbpedro.ctf.dtos.EntradaTransactionSave;
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
+import com.github.prbpedro.ctf.entidades.Account;
+import com.github.prbpedro.ctf.entidades.OperationType;
 import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.services.ITransactionService;
 import com.github.prbpedro.ctf.util.Constantes;
@@ -47,8 +49,8 @@ public class TransactionControllerTests {
 		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.ERROR_PERSIST);
 		assertTrue(resp.getBody().isError());
 		assertEquals(resp.getBody().getEntity().getClass(), Transaction.class);
-		assertEquals(((Transaction) resp.getBody().getEntity()).getAccountId(), entrada.getAccountId());
-		assertEquals(((Transaction) resp.getBody().getEntity()).getOperationTypeId(), entrada.getOperationTypeId());
+		assertEquals(((Transaction) resp.getBody().getEntity()).getAccount().getId(), entrada.getAccountId());
+		assertEquals(((Transaction) resp.getBody().getEntity()).getOperationType().getId(), entrada.getOperationTypeId());
 		assertEquals(((Transaction) resp.getBody().getEntity()).getAmount(), entrada.getAmount());
 		assertNotNull(((Transaction) resp.getBody().getEntity()).getEventDate());
 		assertNull(((Transaction) resp.getBody().getEntity()).getId());
@@ -56,9 +58,15 @@ public class TransactionControllerTests {
 
 	@Test
 	void saveSucessTest() {
+		Account acc = new Account();
+		acc.setId(1L);
+		
+		OperationType ot = new OperationType();
+		ot.setId(1);
+		
 		Transaction t = new Transaction();
-		t.setAccountId(1L);
-		t.setOperationTypeId(1);
+		t.setAccount(acc);
+		t.setOperationType(ot);
 		t.setAmount(BigDecimal.ONE);
 		t.setEventDate(Calendar.getInstance().getTime());
 		t.setId(1L);

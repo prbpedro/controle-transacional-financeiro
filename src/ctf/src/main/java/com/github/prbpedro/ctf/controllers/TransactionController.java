@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.prbpedro.ctf.dtos.EntradaTransactionSave;
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
+import com.github.prbpedro.ctf.entidades.Account;
+import com.github.prbpedro.ctf.entidades.OperationType;
 import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.services.ITransactionService;
 import com.github.prbpedro.ctf.util.Constantes;
@@ -49,13 +51,20 @@ public class TransactionController {
 			@RequestBody 
 			EntradaTransactionSave entrada) {
 		
-		Transaction entity = new Transaction();
-		entity.setAccountId(entrada.getAccountId());
-		entity.setOperationTypeId(entrada.getOperationTypeId());
-		entity.setAmount(entrada.getAmount());
-		entity.setEventDate(Calendar.getInstance().getTime());
-		
+		Transaction entity = null;
 		try {
+			Account acc = new Account();
+			acc.setId(entrada.getAccountId());
+			
+			OperationType ot = new OperationType();
+			ot.setId(entrada.getOperationTypeId());
+			
+			entity = new Transaction();
+			entity.setOperationType(ot);
+			entity.setAccount(acc);
+			entity.setAmount(entrada.getAmount());
+			entity.setEventDate(Calendar.getInstance().getTime());
+			
 			return transactionService.save(entity);
 		} catch (Exception e) {
 			logger.error(Constantes.ERROR_PERSIST, e);

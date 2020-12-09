@@ -12,6 +12,7 @@ public class Constantes {
 	public static final String API_DESCRIPTION_ACCOUNTS_CONTROLLER = "Mantém e retorna dados do tipo Account";
 	public static final String API_MAPPING_ACCOUNTS_CONTROLLER = "/accounts";
 	public static final String API_DESCRIPTION_OPERATION_SAVE_ACCOUNTS_CONTROLLER = "Cria novo registro do tipo Account";
+	public static final String API_DESCRIPTION_OPERATION_GET_ACCOUNTS_CONTROLLER = "Retorna registro do tipo Account através do id";
 	
 	public static final String GLOBAL_MESSAGE = "globalMessage";
 	

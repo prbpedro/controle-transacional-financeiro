@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
+import com.github.prbpedro.ctf.entidades.Account;
+import com.github.prbpedro.ctf.entidades.OperationType;
 import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.repositorios.TransactionRepository;
 import com.github.prbpedro.ctf.services.ITransactionService;
@@ -31,9 +33,15 @@ public class TransactionServiceUnitTests {
 	private TransactionRepository repository;
 	@Test
 	public void saveSucessTest() {
+		Account acc = new Account();
+		acc.setId(1L);
+		
+		OperationType ot = new OperationType();
+		ot.setId(1);
+		
 		Transaction t = new Transaction();
-		t.setAccountId(1L);
-		t.setOperationTypeId(1);
+		t.setAccount(acc);
+		t.setOperationType(ot);
 		t.setAmount(BigDecimal.ONE);
 		t.setEventDate(Calendar.getInstance().getTime());
 		t.setId(1L);
@@ -52,9 +60,15 @@ public class TransactionServiceUnitTests {
 	public void saveExceptionTest() {
 		Mockito.when(repository.save(Mockito.any())).thenThrow(new RuntimeException());
 
+		Account acc = new Account();
+		acc.setId(1L);
+		
+		OperationType ot = new OperationType();
+		ot.setId(1);
+		
 		Transaction t = new Transaction();
-		t.setAccountId(1L);
-		t.setOperationTypeId(1);
+		t.setAccount(acc);
+		t.setOperationType(ot);
 		t.setAmount(BigDecimal.ONE);
 		t.setEventDate(Calendar.getInstance().getTime());
 		t.setId(1L);

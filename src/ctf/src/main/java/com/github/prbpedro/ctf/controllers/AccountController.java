@@ -50,10 +50,10 @@ public class AccountController {
 			@RequestBody 
 			EntradaAccountSave entrada) {
 		
-		Account entity = new Account();
-		entity.setDocumentNumber(entrada.getDocumentNumber());
-		
+		Account entity = null;
 		try {
+			entity = new Account();
+			entity.setDocumentNumber(entrada.getDocumentNumber());
 			return accountService.save(entity);
 		} catch (Exception e) {
 			logger.error(Constantes.ERROR_PERSIST, e);
@@ -63,7 +63,7 @@ public class AccountController {
 		}
 	}
 	
-	@ApiOperation(value = Constantes.API_DESCRIPTION_OPERATION_SAVE_ACCOUNTS_CONTROLLER)
+	@ApiOperation(value = Constantes.API_DESCRIPTION_OPERATION_GET_ACCOUNTS_CONTROLLER)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = Constantes.SUCESSO_BUSCA_ACCOUNT, response = Account.class),
 			@ApiResponse(code = 404, message = Constantes.NOT_FOUND_BUSCA_ACCOUNT, response = GenericOperationResponse.class),

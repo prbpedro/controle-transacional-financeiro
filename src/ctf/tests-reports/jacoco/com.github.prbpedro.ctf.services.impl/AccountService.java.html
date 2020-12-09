@@ -28,15 +28,15 @@ public class AccountService implements IAccountService {
 <span class="fc" id="L28">		boolean existe = accountRepository.existsByDocumentNumber(entity.getDocumentNumber());</span>
 <span class="fc bfc" id="L29" title="All 2 branches covered.">		if (existe) {</span>
 <span class="fc" id="L30">			return new ResponseEntity&lt;&gt;(</span>
-<span class="fc" id="L31">					new GenericOperationResponse(true, Constantes.ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS, entity),</span>
-<span class="fc" id="L32">					HttpStatus.CONFLICT);</span>
+					new GenericOperationResponse(true, Constantes.ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS, entity),
+					HttpStatus.CONFLICT);
 		}
 
 <span class="fc" id="L35">		entity = accountRepository.save(entity);</span>
 
 <span class="fc" id="L37">		return new ResponseEntity&lt;&gt;(</span>
-<span class="fc" id="L38">				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),</span>
-<span class="fc" id="L39">				HttpStatus.OK);</span>
+				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
+				HttpStatus.OK);
 	}
 	
 	public Account get(Long id) {
