@@ -91,12 +91,12 @@ Para iniciar os containers o comando abaixo deve ser executado executado na past
 docker-compose up --build
 ```
 
-#### Container mysql-service
+### Container mysql-service
 Este container contém a instância da base de dados MySQL Server versão 5.7 referenciada pela web-api através da configuração do arquivo [application.properties](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/resources/application.properties).
 A definição deste container é feita através do arquivo [src/ctf/docker/docker-compose.yml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/docker/docker-compose.yml).
 Este container expõe a porta 3306 para acesso ao MySQL Server.
 
-#### Container web-service
+### Container web-service
 Para a execução deste container é necessário gerar um arquivo JAR com a web-api através do comando mvn do Apache Maven executado na pasta que contém o arquivo [pom.xml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/pom.xml) do projeto:
 ```sh
 mvn install
@@ -107,7 +107,7 @@ A definição deste container é feita através do arquivo [src/ctf/docker/Docke
 
 Este container expõe a porta [8080](http://localhost:8080/swagger-ui.html) com a web-api já mencionada.
 
-#### Container prometheus
+### Container prometheus
 Este container contém a instância do Prometeus versão 2.6.1 que deverá obter as métricas da web-api através do endpoint [/actuator/prometheus](http://localhost:8080/actuator/prometheus) desta.
 
 A configuração do Prometheus é feita através do arquivo [prometheus.yml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/docker/config/prometheus/prometheus.yml) referenciado na construção do container.
@@ -116,7 +116,7 @@ A definição deste container é feita através do arquivo [src/ctf/docker/docke
 
 Este container expõe a porta [9090](http://localhost:9090) que contém a apĺicação web de acesso ao Prometheus.
 
-#### Container grafana
+### Container grafana
 Este container contém a instância do Grafana versão 5.4.3 que deverá obter os dados do Prometheus através do [endpoint](http://localhost:9090) exposto pelo container deste e exibir o Dashboard Requests.
 
 Este Dashboard é definido pelo arquivo [src/ctf/docker/config/grafana/dashboards/Requests.json](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/docker/config/grafana/dashboards/Requests.json) referenciado na construção do container e deve exibir um gráfico com o número de chamadas aos endpoints /accounts, /transactions e /accounts/{id} nos últimos 5 minutos, atualizados a cada 5 segundos.
