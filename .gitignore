@@ -9,7 +9,7 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-src/ctf/.mvn/wrapper/maven-wrapper.jar
+*maven-wrapper.jar
 
 
 # Compiled class file
