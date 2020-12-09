@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.github.prbpedro.controle-transacional-financeiro</a> &gt; <a href="index.source.html" class="el_package">com.github.prbpedro.ctf.services.impl</a> &gt; <span class="el_source">TransactionService.java</span></div><h1>TransactionService.java</h1><pre class="source lang-java linenums">package com.github.prbpedro.ctf.services.impl;
+
+import javax.transaction.Transactional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
+import com.github.prbpedro.ctf.entidades.Transaction;
+import com.github.prbpedro.ctf.repositorios.TransactionRepository;
+import com.github.prbpedro.ctf.services.ITransactionService;
+import com.github.prbpedro.ctf.util.Constantes;
+
+@Service
+public class TransactionService implements ITransactionService {
+
+	private final TransactionRepository transactionRepository;
+
+<span class="fc" id="L20">	public TransactionService(TransactionRepository transactionRepository) {</span>
+<span class="fc" id="L21">		this.transactionRepository = transactionRepository;</span>
+<span class="fc" id="L22">	}</span>
+
+	@Override
+	@Transactional
+	public ResponseEntity&lt;GenericOperationResponse&gt; save(Transaction entity) {
+<span class="fc" id="L27">		entity = transactionRepository.save(entity);</span>
+
+<span class="fc" id="L29">		return new ResponseEntity&lt;&gt;(</span>
+<span class="fc" id="L30">				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),</span>
+<span class="fc" id="L31">				HttpStatus.OK);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

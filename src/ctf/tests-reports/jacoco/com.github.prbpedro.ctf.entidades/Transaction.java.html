@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Transaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.github.prbpedro.controle-transacional-financeiro</a> &gt; <a href="index.source.html" class="el_package">com.github.prbpedro.ctf.entidades</a> &gt; <span class="el_source">Transaction.java</span></div><h1>Transaction.java</h1><pre class="source lang-java linenums">package com.github.prbpedro.ctf.entidades;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.github.prbpedro.ctf.util.Constantes;
+
+@Entity
+@Table(name=Constantes.TRANSACTION_TABLE_NAME)
+public class Transaction {
+
+	@Id
+	@GeneratedValue
+	@Column(name=Constantes.TRANSACTION_COLUMN_ID_NAME)
+	private Long id;
+	
+	@Column(name=Constantes.TRANSACTION_COLUMN_ACCOUNT_ID_NAME, nullable=false)
+	private Long accountId;
+	
+	@Column(name=Constantes.TRANSACTION_COLUMN_OPERATION_ID_NAME, nullable=false)
+	private Integer operationTypeId;
+	
+	@Column(name=Constantes.TRANSACTION_COLUMN_AMOUNT_NAME, nullable=false)
+	private BigDecimal amount;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name=Constantes.TRANSACTION_COLUMN_EVENT_DATE_NAME, nullable=false)
+	private Date eventDate;
+	
+<span class="fc" id="L38">	public Transaction() {</span>
+		
+<span class="fc" id="L40">	}</span>
+
+	public Long getId() {
+<span class="fc" id="L43">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L47">		this.id = id;</span>
+<span class="fc" id="L48">	}</span>
+
+	public Long getAccountId() {
+<span class="fc" id="L51">		return accountId;</span>
+	}
+
+	public void setAccountId(Long accountId) {
+<span class="fc" id="L55">		this.accountId = accountId;</span>
+<span class="fc" id="L56">	}</span>
+
+	public Integer getOperationTypeId() {
+<span class="fc" id="L59">		return operationTypeId;</span>
+	}
+
+	public void setOperationTypeId(Integer operationTypeId) {
+<span class="fc" id="L63">		this.operationTypeId = operationTypeId;</span>
+<span class="fc" id="L64">	}</span>
+
+	public BigDecimal getAmount() {
+<span class="fc" id="L67">		return amount;</span>
+	}
+
+	public void setAmount(BigDecimal amount) {
+<span class="fc" id="L71">		this.amount = amount;</span>
+<span class="fc" id="L72">	}</span>
+
+	public Date getEventDate() {
+<span class="fc" id="L75">		return eventDate;</span>
+	}
+
+	public void setEventDate(Date eventDate) {
+<span class="fc" id="L79">		this.eventDate = eventDate;</span>
+<span class="fc" id="L80">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

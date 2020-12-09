@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperationTypeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.github.prbpedro.controle-transacional-financeiro</a> &gt; <a href="index.source.html" class="el_package">com.github.prbpedro.ctf.services.impl</a> &gt; <span class="el_source">OperationTypeService.java</span></div><h1>OperationTypeService.java</h1><pre class="source lang-java linenums">package com.github.prbpedro.ctf.services.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.github.prbpedro.ctf.entidades.OperationType;
+import com.github.prbpedro.ctf.repositorios.OperationTypeRepository;
+import com.github.prbpedro.ctf.services.IOperationTypeService;
+import com.github.prbpedro.ctf.util.Constantes;
+
+@Service
+public class OperationTypeService implements IOperationTypeService {
+
+	private final OperationTypeRepository operationTypeRepository;
+
+<span class="fc" id="L15">	public OperationTypeService(OperationTypeRepository operationTypeRepository) {</span>
+<span class="fc" id="L16">		this.operationTypeRepository = operationTypeRepository;</span>
+<span class="fc" id="L17">	}</span>
+
+	@Override
+	public boolean exists(Integer id) {
+<span class="fc" id="L21">		return operationTypeRepository.existsById(id);</span>
+	}
+
+	@Override
+	public void persistDefaultValues() {
+<span class="fc" id="L26">		operationTypeRepository.save(new OperationType(Constantes.COMPRA_A_VISTA_ID, Constantes.COMPRA_A_VISTA));</span>
+<span class="fc" id="L27">		operationTypeRepository.save(new OperationType(Constantes.COMPRA_PARCELADA_ID, Constantes.COMPRA_PARCELADA));</span>
+<span class="fc" id="L28">		operationTypeRepository.save(new OperationType(Constantes.SAQUE_ID, Constantes.SAQUE));</span>
+<span class="fc" id="L29">		operationTypeRepository.save(new OperationType(Constantes.PAGAMENTO_ID, Constantes.PAGAMENTO));</span>
+<span class="fc" id="L30">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
