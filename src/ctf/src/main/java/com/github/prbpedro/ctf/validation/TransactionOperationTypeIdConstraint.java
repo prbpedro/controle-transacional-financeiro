@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import com.github.prbpedro.ctf.util.Constantes;
 import com.github.prbpedro.ctf.validation.validator.TransactionOperationTypeIdValidator;
 
 @Documented
@@ -16,7 +17,7 @@ import com.github.prbpedro.ctf.validation.validator.TransactionOperationTypeIdVa
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TransactionOperationTypeIdConstraint {
-    String message() default "operationTypeId inválido";
+	String message() default Constantes.OPERATION_TYPE_ID_INVALIDO;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

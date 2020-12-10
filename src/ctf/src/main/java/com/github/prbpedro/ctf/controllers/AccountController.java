@@ -68,7 +68,7 @@ public class AccountController {
 			@ApiResponse(code = 200, message = Constantes.SUCESSO_BUSCA_ACCOUNT, response = Account.class),
 			@ApiResponse(code = 404, message = Constantes.NOT_FOUND_BUSCA_ACCOUNT, response = GenericOperationResponse.class),
 			@ApiResponse(code = 500, message = Constantes.ERRO_BUSCA_ACCOUNT, response = GenericOperationResponse.class), })
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = Constantes.API_MAPPING_ACCOUNTS_GET)
 	public ResponseEntity<?> get(
 			@PathVariable 
 			Long id) {

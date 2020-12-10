@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import com.github.prbpedro.ctf.util.Constantes;
 import com.github.prbpedro.ctf.validation.validator.TransactionAmountValidator;
 
 @Documented
@@ -16,7 +17,7 @@ import com.github.prbpedro.ctf.validation.validator.TransactionAmountValidator;
 @Target( { ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TransactionAmountConstraint {
-    String message() default "amount inválido";
+	String message() default Constantes.AMOUNT_INVALIDO;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

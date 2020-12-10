@@ -11,6 +11,7 @@ public class Constantes {
 	public static final String API_TAG_ACCOUNTS_CONTROLLER = "Account's Controller";
 	public static final String API_DESCRIPTION_ACCOUNTS_CONTROLLER = "Mantém e retorna dados do tipo Account";
 	public static final String API_MAPPING_ACCOUNTS_CONTROLLER = "/accounts";
+	public static final String API_MAPPING_ACCOUNTS_GET = "/{id}";
 	public static final String API_DESCRIPTION_OPERATION_SAVE_ACCOUNTS_CONTROLLER = "Cria novo registro do tipo Account";
 	public static final String API_DESCRIPTION_OPERATION_GET_ACCOUNTS_CONTROLLER = "Retorna registro do tipo Account através do id";
 	
@@ -55,5 +56,9 @@ public class Constantes {
 	public static final String API_DESCRIPTION_TRANSACTIONS_CONTROLLER = "Mantém dados do tipo Transaction";
 	public static final String API_MAPPING_TRANSACTIONS_CONTROLLER = "/transactions";
 	public static final String API_DESCRIPTION_OPERATION_SAVE_TRANSACTIONS_CONTROLLER = "Cria novo registro do tipo Transaction";
+	
+	public static final String ACCOUNT_ID_INVALIDO = "accountId inválido";
+	public static final String AMOUNT_INVALIDO = "amount inválido";
+	public static final String OPERATION_TYPE_ID_INVALIDO = "operationTypeId inválido";
 	
 }
