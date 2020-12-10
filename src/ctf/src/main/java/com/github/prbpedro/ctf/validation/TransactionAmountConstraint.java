@@ -14,10 +14,12 @@ import com.github.prbpedro.ctf.validation.validator.TransactionAmountValidator;
 
 @Documented
 @Constraint(validatedBy = TransactionAmountValidator.class)
-@Target( { ElementType.TYPE})
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TransactionAmountConstraint {
 	String message() default Constantes.AMOUNT_INVALIDO;
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }

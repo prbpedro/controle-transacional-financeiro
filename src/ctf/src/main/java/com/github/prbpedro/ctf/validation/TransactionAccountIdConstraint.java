@@ -14,10 +14,12 @@ import com.github.prbpedro.ctf.validation.validator.TransactionAccountIdValidato
 
 @Documented
 @Constraint(validatedBy = TransactionAccountIdValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD })
+@Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TransactionAccountIdConstraint {
 	String message() default Constantes.ACCOUNT_ID_INVALIDO;
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }
