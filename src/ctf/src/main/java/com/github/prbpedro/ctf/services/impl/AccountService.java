@@ -1,5 +1,6 @@
 package com.github.prbpedro.ctf.services.impl;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Account;
+import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.repositorios.AccountRepository;
 import com.github.prbpedro.ctf.services.IAccountService;
 import com.github.prbpedro.ctf.util.Constantes;
@@ -51,5 +53,19 @@ public class AccountService implements IAccountService {
 	@Override
 	public boolean exists(Long id) {
 		return accountRepository.existsById(id);
+	}
+
+	@Override
+	public boolean updateAvaibleCreditLimit(Transaction t) {
+		Account acc = accountRepository.getOne(t.getAccount().getId());
+		BigDecimal newAmount = acc.getAvailableCreditLimit().add(t.getAmount());
+		
+		if(newAmount.compareTo(BigDecimal.ZERO)<0) {
+			return false;
+		}
+		
+		acc.setAvailableCreditLimit(newAmount);
+		accountRepository.save(acc);
+		return true;
 	}
 }

@@ -50,6 +50,7 @@ public class Constantes {
 	public static final String TRANSACTION_COLUMN_ACCOUNT_ID_NAME = "Account_ID";
 	public static final String TRANSACTION_COLUMN_OPERATION_ID_NAME = "OperationType_ID";
 	public static final String TRANSACTION_COLUMN_AMOUNT_NAME = "Amount";
+	public static final String TRANSACTION_COLUMN_AVAIBLE_CREDIT_LIMIT_NAME = "AvailableCreditLimit";
 	public static final String TRANSACTION_COLUMN_EVENT_DATE_NAME = "EventDate";
 	
 	public static final String API_TAG_TRANSACTIONS_CONTROLLER = "Transaction's Controller";

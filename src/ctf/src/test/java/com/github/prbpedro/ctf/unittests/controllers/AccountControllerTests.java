@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.github.prbpedro.ctf.dtos.EntradaAccountSave;
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Account;
 import com.github.prbpedro.ctf.services.IAccountService;
+import com.github.prbpedro.ctf.services.ITransactionService;
 import com.github.prbpedro.ctf.util.Constantes;
 
 @SpringBootTest
@@ -29,6 +32,9 @@ public class AccountControllerTests {
 
 	@MockBean
 	private IAccountService accountService;
+	
+	@MockBean
+	private ITransactionService transactionService;
 	
 	@Test
 	void getSucessTest() {
@@ -92,6 +98,7 @@ public class AccountControllerTests {
 		Account acc = new Account();
 		acc.setId(999L);
 		acc.setDocumentNumber(999L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 
 		ResponseEntity<GenericOperationResponse> opResp = new ResponseEntity<GenericOperationResponse>(
 				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, acc), HttpStatus.OK);
@@ -100,6 +107,7 @@ public class AccountControllerTests {
 
 		EntradaAccountSave entrada = new EntradaAccountSave();
 		entrada.setDocumentNumber(999L);
+		entrada.setAvailableCreditLimit(BigDecimal.ONE);
 
 		ResponseEntity<GenericOperationResponse> resp = accountController.save(entrada);
 

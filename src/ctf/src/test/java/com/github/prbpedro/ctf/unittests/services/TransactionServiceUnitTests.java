@@ -19,6 +19,7 @@ import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Account;
 import com.github.prbpedro.ctf.entidades.OperationType;
 import com.github.prbpedro.ctf.entidades.Transaction;
+import com.github.prbpedro.ctf.repositorios.AccountRepository;
 import com.github.prbpedro.ctf.repositorios.TransactionRepository;
 import com.github.prbpedro.ctf.services.ITransactionService;
 import com.github.prbpedro.ctf.util.Constantes;
@@ -28,13 +29,19 @@ public class TransactionServiceUnitTests {
 
 	@Autowired
 	private ITransactionService service;
+	
+	@MockBean
+	private AccountRepository accountRepository;
 
 	@MockBean
 	private TransactionRepository repository;
+	
 	@Test
 	public void saveSucessTest() {
 		Account acc = new Account();
 		acc.setId(1L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
+		acc.setDocumentNumber(1L);
 		
 		OperationType ot = new OperationType();
 		ot.setId(1);
@@ -46,6 +53,8 @@ public class TransactionServiceUnitTests {
 		t.setEventDate(Calendar.getInstance().getTime());
 		t.setId(1L);
 
+		Mockito.when(accountRepository.getOne(Mockito.any())).thenReturn(acc);
+		
 		Mockito.when(repository.save(Mockito.any())).thenReturn(t);
 
 		ResponseEntity<GenericOperationResponse> resp = service.save(t);

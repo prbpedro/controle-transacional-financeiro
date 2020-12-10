@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ public class AccountRepositoryIntegretionTests {
 	public void saveSucessTest() {
 		Account acc = new Account();
 		acc.setDocumentNumber(1L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 		assertNull(acc.getId());
 
 		Account savedAcc = accountRepository.save(acc);
@@ -32,12 +34,16 @@ public class AccountRepositoryIntegretionTests {
 		assertNotNull(savedAcc);
 		assertNotNull(savedAcc.getId());
 		assertEquals(acc, savedAcc);
+		assertEquals(acc.getAvailableCreditLimit(), savedAcc.getAvailableCreditLimit());
+		assertEquals(acc.getDocumentNumber(), savedAcc.getDocumentNumber());
+		
 	}
 
 	@Test
 	public void existsByDocumentNumberSucessTest() {
 		Account acc = new Account();
 		acc.setDocumentNumber(2L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 		assertNull(acc.getId());
 
 		Account savedAcc = accountRepository.save(acc);
@@ -68,6 +74,7 @@ public class AccountRepositoryIntegretionTests {
 	public void existsFindByIdSucessTest() {
 		Account acc = new Account();
 		acc.setDocumentNumber(4L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 		assertNull(acc.getId());
 
 		Account savedAcc = accountRepository.save(acc);
@@ -85,6 +92,7 @@ public class AccountRepositoryIntegretionTests {
 	public void existsByIdSucessTest() {
 		Account acc = new Account();
 		acc.setDocumentNumber(55L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 		assertNull(acc.getId());
 
 		accountRepository.save(acc);

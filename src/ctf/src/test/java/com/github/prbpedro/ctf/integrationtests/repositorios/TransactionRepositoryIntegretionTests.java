@@ -35,6 +35,7 @@ public class TransactionRepositoryIntegretionTests {
 		Account acc = new Account();
 		acc.setId(1L);
 		acc.setDocumentNumber(1L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
 		acc = accountRepository.save(acc);
 		
 		OperationType ot = new OperationType();

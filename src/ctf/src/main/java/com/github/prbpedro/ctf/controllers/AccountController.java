@@ -54,6 +54,8 @@ public class AccountController {
 		try {
 			entity = new Account();
 			entity.setDocumentNumber(entrada.getDocumentNumber());
+			entity.setAvailableCreditLimit(entrada.getAvailableCreditLimit());
+			
 			return accountService.save(entity);
 		} catch (Exception e) {
 			logger.error(Constantes.ERROR_PERSIST, e);

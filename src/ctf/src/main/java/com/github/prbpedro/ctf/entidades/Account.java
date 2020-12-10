@@ -1,5 +1,7 @@
 package com.github.prbpedro.ctf.entidades;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,9 @@ public class Account {
 	@Column(name=Constantes.ACCOUNT_COLUMN_DOCUMENT_NUMBER_NAME, nullable=false, unique=true)
 	private Long documentNumber;
 	
+	@Column(name = Constantes.TRANSACTION_COLUMN_AVAIBLE_CREDIT_LIMIT_NAME, nullable = false)
+	private BigDecimal availableCreditLimit;
+	
 	public Account() {
 		
 	}
@@ -39,5 +44,13 @@ public class Account {
 
 	public void setDocumentNumber(Long documentNumber) {
 		this.documentNumber = documentNumber;
+	}
+
+	public BigDecimal getAvailableCreditLimit() {
+		return availableCreditLimit;
+	}
+
+	public void setAvailableCreditLimit(BigDecimal availableCreditLimit) {
+		this.availableCreditLimit = availableCreditLimit;
 	}
 }
