@@ -8,17 +8,17 @@ A pasta [src/ctf](https://github.com/prbpedro/controle-transacional-financeiro/t
 ### Base de dados
 Esta aplicação mantém um banco de dados que contém três tabelas descritas a seguir:
   - Tabela: accounts
-    - Campo: account_id (Chave primária auto gerada)
-    - Campo: document_number (Campo numérico com restirição de unicidade)
+    - Coluna: account_id (Chave primária auto gerada)
+    - Coluna: document_number (Tipo numérico com restirição de unicidade)
   - Tabela: operations_types 
-    - Campo: operation_type_id (Chave primária)
-    - Campo: description (Campo alfanumérico)
+    - Coluna: operation_type_id (Chave primária)
+    - Coluna: description (Tipo alfanumérico)
   - Tabela: transactions
-    - Campo: transaction_id (Chave primária auto gerada)
-    - Campo: account_id (Chave estrangeira que referencia o campo account_id da tabela accounts)
-    - Campo: amount (Campo Decimal que deve ter valor negativo quando operation_type_id igual a 1, 2 ou 3 e valor positivo quando operation_type_id igual a 4)
-    - Campo: event_date (Campo DateTime)
-    - Campo: operation_type_id (Chave estrangeira que referencia o campo operation_type_id da tabela operations_types)
+    - Coluna: transaction_id (Chave primária auto gerada)
+    - Coluna: account_id (Chave estrangeira que referencia o campo account_id da tabela accounts)
+    - Coluna: amount (Tipo Decimal que deve ter valor negativo quando operation_type_id igual a 1, 2 ou 3 e valor positivo quando operation_type_id igual a 4)
+    - Coluna: event_date (Tipo DateTime)
+    - Coluna: operation_type_id (Chave estrangeira que referencia o campo operation_type_id da tabela operations_types)
 
 As validações quanto a integridade referencial da base de dados são realizadas pelas classes [TransactionAccountIdValidator](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/validation/validator/TransactionAccountIdValidator.java) e [TransactionOperationTypeIdValidator](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/validation/validator/TransactionOperationTypeIdValidator.java).
 
