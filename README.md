@@ -10,6 +10,7 @@ Esta aplicação mantém um banco de dados que contém três tabelas descritas a
   - Tabela: accounts
     - Coluna: account_id (Chave primária auto gerada)
     - Coluna: document_number (Tipo numérico com restirição de unicidade)
+    - Coluna: available_credit_limit (Tipo Decimal que deve ser atualizado somando o valor do campo amount dos registros do tipo transaction com account_id igual ao campo account_id desta tabela. Não pode ser menor do que zero impedindo o cadastro de transactions que gerem este amount)
   - Tabela: operations_types 
     - Coluna: operation_type_id (Chave primária)
     - Coluna: description (Tipo alfanumérico)
@@ -29,7 +30,9 @@ As validações quanto a integridade referencial da base de dados são realizada
 
 A validação do campo amount é realizada pela classe [TransactionAmountValidator](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/validation/validator/TransactionAmountValidator.java).
 
-A validação de unicidade do campo document_number é feita pela classe [AccountService](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/services/AccountService.java).
+A validação de unicidade do campo document_number é feita pela classe [AccountService](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/services/impl/AccountService.java).
+
+A validação do valor do campo available_credit_limit é feita pela classe [TransactionService](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/java/com/github/prbpedro/ctf/services/impl/TransactionService.java).
 
 O banco de dados é configurado através do arquivo  [application.properties](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/resources/application.properties) e aponta para uma instância do banco de dados que é controlada pelo Docker.
 
@@ -62,7 +65,7 @@ Para a documentação dos endpoints foram utilizados os frameworks springfox-swa
 A interface gráfica da documentação pode ser acessada pelo endpoint [/swagger-ui.html](http://localhost:8080/swagger-ui.html) também exposto pela api.
 
 ### Testes unitários e de integração
-Foram construídos 46 testes unitários e de integração que fazem 100% de cobertura de código pelos testes.
+Foram construídos 49 testes unitários e de integração que fazem 100% de cobertura de código pelos testes.
 
 As classes de testes estão nas subpastas da pasta [src/test](https://github.com/prbpedro/controle-transacional-financeiro/tree/main/src/ctf/src/test).
 
