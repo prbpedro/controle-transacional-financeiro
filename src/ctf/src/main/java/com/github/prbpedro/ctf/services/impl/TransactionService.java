@@ -2,7 +2,6 @@ package com.github.prbpedro.ctf.services.impl;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,34 +17,30 @@ import com.github.prbpedro.ctf.util.Constantes;
 public class TransactionService implements ITransactionService {
 
 	private final TransactionRepository transactionRepository;
-	
-	@Autowired
+
 	private IAccountService accountService;
 
-	public TransactionService(
-			TransactionRepository transactionRepository) {
+	public TransactionService(IAccountService accountService, TransactionRepository transactionRepository) {
 		this.transactionRepository = transactionRepository;
+		this.accountService = accountService;
 	}
 
 	@Override
 	@Transactional
 	public ResponseEntity<GenericOperationResponse> save(Transaction entity) {
-		
+
 		entity.setAccount(accountService.get(entity.getAccount().getId()));
-		
-		if(!accountService.updateAvaibleCreditLimit(entity)) {
-			GenericOperationResponse body = new GenericOperationResponse(false, Constantes.ERROR_PERSIST, entity);
-			body.getMessages().put("avaibleCreditLimit", "não existe crédito suficiente.");
-			return new ResponseEntity<>(
-					body,
-					HttpStatus.OK);
+
+		if (!accountService.updateAvaibleCreditLimit(entity.getAccount().getId(), entity.getAmount())) {
+			GenericOperationResponse body = new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity);
+			body.getMessages().put(Constantes.AVAIBLE_CREDIT_LIMIT, Constantes.NAO_EXISTE_CREDITO_SUFICIENTE);
+			return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		entity = transactionRepository.save(entity);
 
-		return new ResponseEntity<>(
-				 new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
+		return new ResponseEntity<>(new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
 				HttpStatus.OK);
 	}
-	
+
 }

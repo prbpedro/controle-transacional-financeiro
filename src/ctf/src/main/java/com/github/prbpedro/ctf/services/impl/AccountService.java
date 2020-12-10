@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Account;
-import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.repositorios.AccountRepository;
 import com.github.prbpedro.ctf.services.IAccountService;
 import com.github.prbpedro.ctf.util.Constantes;
@@ -56,9 +55,9 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public boolean updateAvaibleCreditLimit(Transaction t) {
-		Account acc = accountRepository.getOne(t.getAccount().getId());
-		BigDecimal newAmount = acc.getAvailableCreditLimit().add(t.getAmount());
+	public boolean updateAvaibleCreditLimit(Long accountId, BigDecimal amount) {
+		Account acc = accountRepository.getOne(accountId);
+		BigDecimal newAmount = acc.getAvailableCreditLimit().add(amount);
 		
 		if(newAmount.compareTo(BigDecimal.ZERO)<0) {
 			return false;

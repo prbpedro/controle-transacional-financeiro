@@ -61,5 +61,7 @@ public class Constantes {
 	public static final String ACCOUNT_ID_INVALIDO = "accountId inválido";
 	public static final String AMOUNT_INVALIDO = "amount inválido";
 	public static final String OPERATION_TYPE_ID_INVALIDO = "operationTypeId inválido";
+	public static final String NAO_EXISTE_CREDITO_SUFICIENTE = "não existe crédito suficiente.";
+	public static final String AVAIBLE_CREDIT_LIMIT = "avaibleCreditLimit";
 	
 }

@@ -69,8 +69,8 @@ public class TransactionController {
 <span class="fc" id="L69">		} catch (Exception e) {</span>
 <span class="fc" id="L70">			logger.error(Constantes.ERROR_PERSIST, e);</span>
 <span class="fc" id="L71">			return new ResponseEntity&lt;&gt;(</span>
-					new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity),
-					HttpStatus.INTERNAL_SERVER_ERROR);
+<span class="fc" id="L72">					new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity),</span>
+<span class="fc" id="L73">					HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 	

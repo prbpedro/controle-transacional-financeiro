@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.github.prbpedro.controle-transacional-financeiro</a> &gt; <a href="index.source.html" class="el_package">com.github.prbpedro.ctf.services.impl</a> &gt; <span class="el_source">AccountService.java</span></div><h1>AccountService.java</h1><pre class="source lang-java linenums">package com.github.prbpedro.ctf.services.impl;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -19,38 +20,52 @@ public class AccountService implements IAccountService {
 
 	private final AccountRepository accountRepository;
 
-<span class="fc" id="L22">	public AccountService(AccountRepository accountRepository) {</span>
-<span class="fc" id="L23">		this.accountRepository = accountRepository;</span>
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L23">	public AccountService(AccountRepository accountRepository) {</span>
+<span class="fc" id="L24">		this.accountRepository = accountRepository;</span>
+<span class="fc" id="L25">	}</span>
 
 	@Transactional
 	public ResponseEntity&lt;GenericOperationResponse&gt; save(Account entity) {
-<span class="fc" id="L28">		boolean existe = accountRepository.existsByDocumentNumber(entity.getDocumentNumber());</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">		if (existe) {</span>
-<span class="fc" id="L30">			return new ResponseEntity&lt;&gt;(</span>
-					new GenericOperationResponse(true, Constantes.ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS, entity),
-					HttpStatus.CONFLICT);
+<span class="fc" id="L29">		boolean existe = accountRepository.existsByDocumentNumber(entity.getDocumentNumber());</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">		if (existe) {</span>
+<span class="fc" id="L31">			return new ResponseEntity&lt;&gt;(</span>
+<span class="fc" id="L32">					new GenericOperationResponse(true, Constantes.ERROR_ACCOUNT_DOCUMENT_NUMBER_ALREDY_EXISTS, entity),</span>
+<span class="fc" id="L33">					HttpStatus.CONFLICT);</span>
 		}
 
-<span class="fc" id="L35">		entity = accountRepository.save(entity);</span>
+<span class="fc" id="L36">		entity = accountRepository.save(entity);</span>
 
-<span class="fc" id="L37">		return new ResponseEntity&lt;&gt;(</span>
-				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
-				HttpStatus.OK);
+<span class="fc" id="L38">		return new ResponseEntity&lt;&gt;(</span>
+<span class="fc" id="L39">				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),</span>
+<span class="fc" id="L40">				HttpStatus.OK);</span>
 	}
 	
 	public Account get(Long id) {
-<span class="fc" id="L43">		Optional&lt;Account&gt; entity = accountRepository.findById(id);</span>
-<span class="fc bfc" id="L44" title="All 2 branches covered.">		if(entity.isPresent()) {</span>
-<span class="fc" id="L45">			return entity.get();</span>
+<span class="fc" id="L44">		Optional&lt;Account&gt; entity = accountRepository.findById(id);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		if(entity.isPresent()) {</span>
+<span class="fc" id="L46">			return entity.get();</span>
 		}else {
-<span class="fc" id="L47">			return null;</span>
+<span class="fc" id="L48">			return null;</span>
 		}
 	}
 
 	@Override
 	public boolean exists(Long id) {
-<span class="fc" id="L53">		return accountRepository.existsById(id);</span>
+<span class="fc" id="L54">		return accountRepository.existsById(id);</span>
+	}
+
+	@Override
+	public boolean updateAvaibleCreditLimit(Long accountId, BigDecimal amount) {
+<span class="fc" id="L59">		Account acc = accountRepository.getOne(accountId);</span>
+<span class="fc" id="L60">		BigDecimal newAmount = acc.getAvailableCreditLimit().add(amount);</span>
+		
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		if(newAmount.compareTo(BigDecimal.ZERO)&lt;0) {</span>
+<span class="fc" id="L63">			return false;</span>
+		}
+		
+<span class="fc" id="L66">		acc.setAvailableCreditLimit(newAmount);</span>
+<span class="fc" id="L67">		accountRepository.save(acc);</span>
+<span class="fc" id="L68">		return true;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

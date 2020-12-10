@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.github.prbpedro.ctf.dtos.GenericOperationResponse;
 import com.github.prbpedro.ctf.entidades.Transaction;
 import com.github.prbpedro.ctf.repositorios.TransactionRepository;
+import com.github.prbpedro.ctf.services.IAccountService;
 import com.github.prbpedro.ctf.services.ITransactionService;
 import com.github.prbpedro.ctf.util.Constantes;
 
@@ -17,19 +18,30 @@ public class TransactionService implements ITransactionService {
 
 	private final TransactionRepository transactionRepository;
 
-<span class="fc" id="L20">	public TransactionService(TransactionRepository transactionRepository) {</span>
-<span class="fc" id="L21">		this.transactionRepository = transactionRepository;</span>
-<span class="fc" id="L22">	}</span>
+	private IAccountService accountService;
+
+<span class="fc" id="L23">	public TransactionService(IAccountService accountService, TransactionRepository transactionRepository) {</span>
+<span class="fc" id="L24">		this.transactionRepository = transactionRepository;</span>
+<span class="fc" id="L25">		this.accountService = accountService;</span>
+<span class="fc" id="L26">	}</span>
 
 	@Override
 	@Transactional
 	public ResponseEntity&lt;GenericOperationResponse&gt; save(Transaction entity) {
-<span class="fc" id="L27">		entity = transactionRepository.save(entity);</span>
 
-<span class="fc" id="L29">		return new ResponseEntity&lt;&gt;(</span>
-				new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),
-				HttpStatus.OK);
+<span class="fc" id="L32">		entity.setAccount(accountService.get(entity.getAccount().getId()));</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		if (!accountService.updateAvaibleCreditLimit(entity.getAccount().getId(), entity.getAmount())) {</span>
+<span class="fc" id="L35">			GenericOperationResponse body = new GenericOperationResponse(true, Constantes.ERROR_PERSIST, entity);</span>
+<span class="fc" id="L36">			body.getMessages().put(Constantes.AVAIBLE_CREDIT_LIMIT, Constantes.NAO_EXISTE_CREDITO_SUFICIENTE);</span>
+<span class="fc" id="L37">			return new ResponseEntity&lt;&gt;(body, HttpStatus.BAD_REQUEST);</span>
+		}
+
+<span class="fc" id="L40">		entity = transactionRepository.save(entity);</span>
+
+<span class="fc" id="L42">		return new ResponseEntity&lt;&gt;(new GenericOperationResponse(false, Constantes.SUCESS_PERSIST, entity),</span>
+<span class="fc" id="L43">				HttpStatus.OK);</span>
 	}
-	
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

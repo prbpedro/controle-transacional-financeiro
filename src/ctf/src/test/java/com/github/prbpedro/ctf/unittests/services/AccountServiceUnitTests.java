@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -81,6 +82,52 @@ public class AccountServiceUnitTests {
 		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.SUCESS_PERSIST);
 		assertEquals(resp.getBody().getEntity(), acc);
 		assertFalse(resp.getBody().isError());
+	}
+	
+	@Test
+	public void updateAvaibleCreditLimitSucessTest() {
+		Mockito.when(accountRepository.existsByDocumentNumber(1L)).thenReturn(false);
+
+		Account acc = new Account();
+		acc.setDocumentNumber(1L);
+		acc.setId(1L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
+
+		Mockito.when(accountRepository.save(Mockito.any())).thenReturn(acc);
+		Mockito.when(accountRepository.getOne(Mockito.any())).thenReturn(acc);
+
+		ResponseEntity<GenericOperationResponse> resp = accountService.save(acc);
+
+		assertEquals(HttpStatus.OK, resp.getStatusCode());
+		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.SUCESS_PERSIST);
+		assertEquals(resp.getBody().getEntity(), acc);
+		assertFalse(resp.getBody().isError());
+		
+		boolean ret = accountService.updateAvaibleCreditLimit(acc.getId(), BigDecimal.ONE);
+		assertTrue(ret);
+	}
+	
+	@Test
+	public void updateAvaibleCreditLimitFailTest() {
+		Mockito.when(accountRepository.existsByDocumentNumber(1L)).thenReturn(false);
+
+		Account acc = new Account();
+		acc.setDocumentNumber(1L);
+		acc.setId(1L);
+		acc.setAvailableCreditLimit(BigDecimal.ONE);
+
+		Mockito.when(accountRepository.save(Mockito.any())).thenReturn(acc);
+		Mockito.when(accountRepository.getOne(Mockito.any())).thenReturn(acc);
+
+		ResponseEntity<GenericOperationResponse> resp = accountService.save(acc);
+
+		assertEquals(HttpStatus.OK, resp.getStatusCode());
+		assertEquals(resp.getBody().getMessages().get(Constantes.GLOBAL_MESSAGE), Constantes.SUCESS_PERSIST);
+		assertEquals(resp.getBody().getEntity(), acc);
+		assertFalse(resp.getBody().isError());
+		
+		boolean ret = accountService.updateAvaibleCreditLimit(acc.getId(), BigDecimal.valueOf(-2L));
+		assertFalse(ret);
 	}
 
 	@Test
