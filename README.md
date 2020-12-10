@@ -93,7 +93,9 @@ docker-compose up --build
 
 ### Container mysql-service
 Este container contém a instância da base de dados MySQL Server versão 5.7 referenciada pela web-api através da configuração do arquivo [application.properties](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/src/main/resources/application.properties).
+
 A definição deste container é feita através do arquivo [src/ctf/docker/docker-compose.yml](https://github.com/prbpedro/controle-transacional-financeiro/blob/main/src/ctf/docker/docker-compose.yml).
+
 Este container expõe a porta 3306 para acesso ao MySQL Server.
 
 ### Container web-service
