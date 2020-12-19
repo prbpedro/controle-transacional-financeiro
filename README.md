@@ -10,7 +10,7 @@ Esta aplicação mantém um banco de dados que contém três tabelas descritas a
   - Tabela: accounts
     - Coluna: account_id (Chave primária auto gerada)
     - Coluna: document_number (Tipo numérico com restirição de unicidade)
-    - Coluna: available_credit_limit (Tipo Decimal que deve ser atualizado somando o valor do campo amount dos registros do tipo transaction com account_id igual ao campo account_id desta tabela. Não pode ser menor do que zero impedindo o cadastro de transactions que gerem este amount)
+    - Coluna: available_credit_limit (Tipo Decimal que deve ser atualizado somando o valor do campo amount dos registros do tipo transaction com account_id igual ao campo account_id desta tabela. Não pode ser menor do que zero impedindo o cadastro de transactions que gerem este valor no campo available_credit_limit)
   - Tabela: operations_types 
     - Coluna: operation_type_id (Chave primária)
     - Coluna: description (Tipo alfanumérico)
