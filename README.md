@@ -134,7 +134,7 @@ A definição deste container é feita através do arquivo [src/ctf/docker/docke
 
 Este container expõe a porta [3000](http://localhost:3000) que contém a apĺicação web de acesso ao Grafana (usuário admin, senha password).
 
-## A fazer
+## A Fazer
  - Documentação do código fonte
 
 Licença
