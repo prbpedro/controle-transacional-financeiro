@@ -140,4 +140,3 @@ Este container expõe a porta [3000](http://localhost:3000) que contém a apĺic
 Licença
 ----
 MIT
-
